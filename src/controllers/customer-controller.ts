@@ -6,7 +6,7 @@ import {
 } from "../models/customer-model"
 import { CustomerService } from "../services/customer-service"
 
-export class UserController {
+export class CustomerController {
     static async register(req: Request, res: Response, next: NextFunction) {
         try {
             const request: RegisterCustomerRequest = req.body as RegisterCustomerRequest

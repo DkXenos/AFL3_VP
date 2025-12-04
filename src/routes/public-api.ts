@@ -1,8 +1,8 @@
 import express from 'express';
-import { UserController } from '../controllers/customer-controller';
+import { CustomerController } from '../controllers/customer-controller';
 
 export const publicRouter = express.Router();
 
-publicRouter.post("/register", UserController.register);
+publicRouter.post("/register", CustomerController.register);
 
-publicRouter.post("/login", UserController.login);
+publicRouter.post("/login", CustomerController.login);
