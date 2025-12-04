@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken"
-import { UserJWTPayload } from "../models/customer-model"
+import { CustomerJWTPayload } from "../models/customer-model"
 import { StringValue } from "ms"
 import { JWT_SECRET_KEY } from "./env-util"
 
 export const generateToken = (
-    payload: UserJWTPayload,
+    payload: CustomerJWTPayload,
     expiryTime: StringValue = "1h"
 ): string => {
     return jwt.sign(payload, JWT_SECRET_KEY || "secret_key", {
@@ -12,6 +12,6 @@ export const generateToken = (
     })
 }
 
-export const verifyToken = (token: string): UserJWTPayload => {
-    return jwt.verify(token, JWT_SECRET_KEY || "secret_key") as UserJWTPayload
+export const verifyToken = (token: string): CustomerJWTPayload => {
+    return jwt.verify(token, JWT_SECRET_KEY || "secret_key") as CustomerJWTPayload
 }

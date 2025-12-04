@@ -1,10 +1,10 @@
 import { NextFunction, Response } from "express"
-import { UserRequest } from "../models/customer-request-model"
+import { CustomerRequest } from "../models/customer-request-model"
 import { ResponseError } from "../error/response-error"
 import { verifyToken } from "../utils/jwt-util"
 
 export const authMiddleware = (
-    req: UserRequest,
+    req: CustomerRequest,
     res: Response,
     next: NextFunction
 ) => {
@@ -20,7 +20,7 @@ export const authMiddleware = (
         const payload = verifyToken(token!)
 
         if (payload) {
-            req.user = payload
+            req.customer = payload
         } else {
             next(new ResponseError(401, "Unauthorized user!"))
         }
