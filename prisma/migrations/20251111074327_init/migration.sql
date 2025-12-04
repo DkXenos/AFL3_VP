@@ -1,11 +1,11 @@
 -- CreateTable
-CREATE TABLE "users" (
+CREATE TABLE "customers" (
     "id" SERIAL NOT NULL,
     "username" VARCHAR(100) NOT NULL,
-    "email" VARCHAR(150) NOT NULL,
+    "phone" VARCHAR(150) NOT NULL,
     "password" VARCHAR(100) NOT NULL,
 
-    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "customers_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -16,13 +16,13 @@ CREATE TABLE "todos" (
     "priority" VARCHAR(10) NOT NULL,
     "due_date" VARCHAR(100) NOT NULL,
     "status" VARCHAR(20) NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "customer_id" INTEGER NOT NULL,
 
     CONSTRAINT "todos_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+CREATE UNIQUE INDEX "customers_phone_key" ON "customers"("phone");
 
 -- AddForeignKey
-ALTER TABLE "todos" ADD CONSTRAINT "todos_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "todos" ADD CONSTRAINT "todos_customer_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "customers"("id") ON DELETE CASCADE ON UPDATE CASCADE;

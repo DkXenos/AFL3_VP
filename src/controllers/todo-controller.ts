@@ -1,17 +1,17 @@
 import { NextFunction } from "express"
 import { Response } from "express"
-import { UserRequest } from "../models/user-request-model"
+import { CustomerRequest } from "../models/customer-request-model"
 import { TodoService } from "../services/todo-service"
 import { TodoCreateUpdateRequest } from "../models/todo-model"
 
 export class TodoController {
     static async getAllTodos(
-        req: UserRequest,
+        req: CustomerRequest,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const response = await TodoService.getAllTodos(req.user!)
+            const response = await TodoService.getAllTodos(req.customer!)
 
             res.status(200).json({
                 data: response,
@@ -21,11 +21,11 @@ export class TodoController {
         }
     }
     
-    static async getTodo(req: UserRequest, res: Response, next: NextFunction) {
+    static async getTodo(req: CustomerRequest, res: Response, next: NextFunction) {
         try {
             const todoListId = Number(req.params.todoListId)
 
-            const response = await TodoService.getTodo(req.user!, todoListId)
+            const response = await TodoService.getTodo(req.customer!, todoListId)
 
             res.status(200).json({
                 data: response,
@@ -36,14 +36,14 @@ export class TodoController {
     }
 
     static async createTodo(
-        req: UserRequest,
+        req: CustomerRequest,
         res: Response,
         next: NextFunction
     ) {
         try {
             const reqData = req.body as TodoCreateUpdateRequest
 
-            const response = await TodoService.createTodo(req.user!, reqData)
+            const response = await TodoService.createTodo(req.customer!, reqData)
 
             res.status(200).json({
                 data: response,
@@ -54,7 +54,7 @@ export class TodoController {
     }
 
     static async updateTodo(
-        req: UserRequest,
+        req: CustomerRequest,
         res: Response,
         next: NextFunction
     ) {
@@ -63,7 +63,7 @@ export class TodoController {
             const todoListId = Number(req.params.todoListId)
 
             const response = await TodoService.updateTodo(
-                req.user!,
+                req.customer!,
                 reqData,
                 todoListId
             )
@@ -77,14 +77,14 @@ export class TodoController {
     }
 
     static async deleteTodo(
-        req: UserRequest,
+        req: CustomerRequest,
         res: Response,
         next: NextFunction
     ) {
         try {
             const todoListId = Number(req.params.todoListId)
 
-            const response = await TodoService.deleteTodo(req.user!, todoListId)
+            const response = await TodoService.deleteTodo(req.customer!, todoListId)
 
             res.status(200).json({
                 data: response,

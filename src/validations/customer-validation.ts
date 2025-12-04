@@ -1,6 +1,6 @@
 import { z, ZodType } from "zod"
 
-export class UserValidation {
+export class CustomerValidation {
     static readonly REGISTER: ZodType = z.object({
         username: z
             .string({
@@ -9,12 +9,12 @@ export class UserValidation {
             .min(1, {
                 error: "Username can not be empty!",
             }),
-        email: z
-            .email({
-                error: "Email format is invalid!",
+        phone: z
+            .string({
+                error: "phone format is invalid!",
             })
             .min(1, {
-                error: "Email can not be empty!",
+                error: "phone can not be empty!",
             }),
         password: z
             .string({
@@ -26,12 +26,12 @@ export class UserValidation {
     })
 
     static readonly LOGIN: ZodType = z.object({
-        email: z
-            .email({
-                error: "Email format is invalid!",
+        phone: z
+            .string({
+                error: "phone format is invalid!",
             })
             .min(1, {
-                error: "Email can not be empty!",
+                error: "phone can not be empty!",
             }),
         password: z
             .string({

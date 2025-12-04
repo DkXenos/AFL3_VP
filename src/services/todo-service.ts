@@ -1,16 +1,16 @@
 import { Todo } from "../../generated/prisma"
 import { ResponseError } from "../error/response-error"
 import { TodoCreateUpdateRequest, TodoResponse, toTodoResponse, toTodoResponseList } from "../models/todo-model"
-import { UserJWTPayload } from "../models/user-model"
+import { CustomerJWTPayload } from "../models/customer-model"
 import { prismaClient } from "../utils/database-util"
 import { TodoValidation } from "../validations/todo-validation"
 import { Validation } from "../validations/validation"
 
 export class TodoService{
-    static async getAllTodos(user: UserJWTPayload): Promise<TodoResponse[]> {
+    static async getAllTodos(customer: CustomerJWTPayload): Promise<TodoResponse[]> {
         const todos = await prismaClient.todo.findMany({
             where: {
-                user_id: user.id,
+                customer_id: customer.id,
             },
         })
 
@@ -18,21 +18,21 @@ export class TodoService{
     }
 
     static async getTodo(
-        user: UserJWTPayload,
+        customer: CustomerJWTPayload,
         todoListId: number
     ): Promise<TodoResponse> {
-        const todo = await this.checkTodoIsEmpty(user.id, todoListId)
+        const todo = await this.checkTodoIsEmpty(customer.id, todoListId)
 
         return toTodoResponse(todo)
     }
 
     static async checkTodoIsEmpty(
-        userId: number,
+        customerId: number,
         todoListId: number
     ): Promise<Todo> {
         const todo = await prismaClient.todo.findFirst({
             where: {
-                user_id: userId,
+                customer_id: customerId,
                 id: todoListId,
             },
         })
@@ -45,7 +45,7 @@ export class TodoService{
     }
 
     static async createTodo(
-        user: UserJWTPayload,
+        customer: CustomerJWTPayload,
         reqData: TodoCreateUpdateRequest
     ): Promise<string> {
         const validatedData = Validation.validate(
@@ -60,7 +60,7 @@ export class TodoService{
                 status: validatedData.status,
                 priority: validatedData.priority,
                 due_date: validatedData.due_date,
-                user_id: user.id,
+                customer_id: customer.id,
             },
         })
 
@@ -68,7 +68,7 @@ export class TodoService{
     }
 
     static async updateTodo(
-        user: UserJWTPayload,
+        customer: CustomerJWTPayload,
         req: TodoCreateUpdateRequest,
         todoListId: number
     ) {
@@ -77,11 +77,11 @@ export class TodoService{
             req
         )
 
-        await this.checkTodoIsEmpty(user.id, todoListId)
+        await this.checkTodoIsEmpty(customer.id, todoListId)
 
         await prismaClient.todo.update({
             where: {
-                user_id: user.id,
+                customer_id: customer.id,
                 id: todoListId,
             },
             data: {
@@ -90,19 +90,19 @@ export class TodoService{
                 status: validatedData.status,
                 priority: validatedData.priority,
                 due_date: validatedData.due_date,
-                user_id: user.id,
+                customer_id: customer.id,
             },
         })
 
         return "Todo data has been updated successfully!"
     }
 
-    static async deleteTodo(user: UserJWTPayload, todoListId: number) {
-        await this.checkTodoIsEmpty(user.id, todoListId)
+    static async deleteTodo(customer: CustomerJWTPayload, todoListId: number) {
+        await this.checkTodoIsEmpty(customer.id, todoListId)
 
         await prismaClient.todo.delete({
             where: {
-                user_id: user.id,
+                customer_id: customer.id,
                 id: todoListId,
             },
         })

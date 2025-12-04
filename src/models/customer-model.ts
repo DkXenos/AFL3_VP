@@ -1,38 +1,38 @@
 import { string } from "zod"
 import { generateToken } from "../utils/jwt-util"
 
-export interface UserJWTPayload {
+export interface CustomerJWTPayload {
     id: number
     username: string
-    email: string
+    phone: string
 }
 
-export interface RegisterUserRequest {
+export interface RegisterCustomerRequest {
     username: string
-    email: string
+    phone: string
     password: string
 }
 
-export interface LoginUserRequest {
-    email: string
+export interface LoginCustomerRequest {
+    phone: string
     password: string
 }
 
-export interface UserResponse {
+export interface CustomerResponse {
     token?: string
 }
 
-export function toUserResponse(
+export function toCustomerResponse(
     id: number,
     username: string,
-    email: string
-): UserResponse {
+    phone: string
+): CustomerResponse {
     return {
         token: generateToken(
             {
                 id: id,
                 username: username,
-                email: email,
+                phone: phone,
             },
             "1h"
         ),

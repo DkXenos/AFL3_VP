@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from "express"
 import {
-    LoginUserRequest,
-    RegisterUserRequest,
-    UserResponse,
-} from "../models/user-model"
-import { UserService } from "../services/user-service"
+    LoginCustomerRequest,
+    RegisterCustomerRequest,
+    CustomerResponse,
+} from "../models/customer-model"
+import { CustomerService } from "../services/customer-service"
 
 export class UserController {
     static async register(req: Request, res: Response, next: NextFunction) {
         try {
-            const request: RegisterUserRequest = req.body as RegisterUserRequest
-            const response: UserResponse = await UserService.register(request)
+            const request: RegisterCustomerRequest = req.body as RegisterCustomerRequest
+            const response: CustomerResponse = await CustomerService.register(request)
 
             res.status(200).json({
                 data: response,
@@ -22,8 +22,8 @@ export class UserController {
 
     static async login(req: Request, res: Response, next: NextFunction) {
         try {
-            const request: LoginUserRequest = req.body as LoginUserRequest
-            const response: UserResponse = await UserService.login(request)
+            const request: LoginCustomerRequest = req.body as LoginCustomerRequest
+            const response: CustomerResponse = await CustomerService.login(request)
 
             res.status(200).json({
                 data: response,

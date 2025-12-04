@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { UserJWTPayload } from "../models/user-model"
+import { UserJWTPayload } from "../models/customer-model"
 import { StringValue } from "ms"
 import { JWT_SECRET_KEY } from "./env-util"
 

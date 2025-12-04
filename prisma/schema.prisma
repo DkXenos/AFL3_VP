@@ -11,12 +11,12 @@ datasource db {
 model Customer {
   id       Int    @id @default(autoincrement())
   username String @db.VarChar(100)
-  email    String @unique @db.VarChar(150)
+  phone    String @unique @db.VarChar(20)
   password String @db.VarChar(100)
 
   todos Todo[]
 
-  @@map("users")
+  @@map("customers")
 }
 
 model Todo {
