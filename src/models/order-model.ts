@@ -51,11 +51,11 @@ export interface OrderCreateRequest {
     restaurant_id: number
 }
 
-// Calculate estimated arrival: 10 minutes per item + 10 minutes for delivery
+
 export function calculateEstimatedArrival(itemCount: number): Date {
     const now = new Date()
-    const preparationTime = itemCount * 10 // 10 minutes per item
-    const deliveryTime = 10 // 10 minutes for delivery
+    const preparationTime = itemCount * 10 
+    const deliveryTime = 10 
     const totalMinutes = preparationTime + deliveryTime
     
     now.setMinutes(now.getMinutes() + totalMinutes)

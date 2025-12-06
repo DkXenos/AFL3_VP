@@ -7,14 +7,14 @@ export const privateRouter = express.Router()
 
 privateRouter.use(authMiddleware)
 
-// Restaurant routes
+// restaurant routes
 privateRouter.get("/restaurants", RestaurantController.getAllRestaurants)
 privateRouter.get("/restaurants/:restaurantId", RestaurantController.getRestaurant)
 privateRouter.post("/restaurants", RestaurantController.createRestaurant)
 privateRouter.put("/restaurants/:restaurantId", RestaurantController.updateRestaurant)
 privateRouter.delete("/restaurants/:restaurantId", RestaurantController.deleteRestaurant)
 
-// Order routes
+// order routes
 privateRouter.post("/orders", OrderController.createOrder)
 privateRouter.get("/orders", OrderController.getAllOrders)
 privateRouter.get("/orders/:orderId", OrderController.getOrderById)

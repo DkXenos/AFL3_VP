@@ -13,5 +13,4 @@ app.use(errorMiddleware);
 
 app.listen(PORT || 3000, () => {
     console.log('Connected yeay')
-    console.log(`aku telah buatkan sebuah seeder jadi bisa menggunakan data dummmy yang saya seed`);
 });

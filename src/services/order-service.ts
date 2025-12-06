@@ -13,7 +13,7 @@ import { OrderValidation } from "../validations/order-validation"
 import { Validation } from "../validations/validation"
 
 export class OrderService {
-    // Create new order
+    
     static async createOrder(
         customer: CustomerJWTPayload,
         reqData: OrderCreateRequest
@@ -23,7 +23,7 @@ export class OrderService {
             reqData
         )
 
-        // Check if restaurant exists
+        
         const restaurant = await prismaClient.restaurant.findFirst({
             where: {
                 id: validatedData.restaurant_id,
@@ -34,15 +34,15 @@ export class OrderService {
             throw new ResponseError(404, "Restaurant not found!")
         }
 
-        // Check if restaurant is open
+        
         if (!restaurant.is_open) {
             throw new ResponseError(400, "Restaurant is currently closed!")
         }
 
-        // Calculate estimated arrival time
+        
         const estimatedArrival = calculateEstimatedArrival(validatedData.item_count)
 
-        // Create the order
+        
         const order = await prismaClient.order.create({
             data: {
                 item_count: validatedData.item_count,
@@ -72,7 +72,7 @@ export class OrderService {
         return toOrderResponse(order)
     }
 
-    // Get all orders
+    
     static async getAllOrders(): Promise<OrderResponse[]> {
         const orders = await prismaClient.order.findMany({
             include: {
@@ -100,7 +100,7 @@ export class OrderService {
         return toOrderResponseList(orders)
     }
 
-    // Get orders by customer
+    
     static async getOrdersByCustomer(customerId: number): Promise<OrderResponse[]> {
         const orders = await prismaClient.order.findMany({
             where: {
@@ -131,7 +131,7 @@ export class OrderService {
         return toOrderResponseList(orders)
     }
 
-    // Get orders by restaurant
+    
     static async getOrdersByRestaurant(restaurantId: number): Promise<OrderResponse[]> {
         const restaurant = await prismaClient.restaurant.findFirst({
             where: {
@@ -172,7 +172,7 @@ export class OrderService {
         return toOrderResponseList(orders)
     }
 
-    // Get specific order by ID
+    
     static async getOrderById(orderId: number): Promise<OrderResponse> {
         const order = await prismaClient.order.findFirst({
             where: {

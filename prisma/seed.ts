@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
+//seeder untuk debug and gausa create create akun terus tiap mau test
 async function main() {
   await prisma.order.deleteMany();
   await prisma.restaurant.deleteMany();

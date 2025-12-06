@@ -4,7 +4,7 @@ import { OrderService } from "../services/order-service"
 import { OrderCreateRequest } from "../models/order-model"
 
 export class OrderController {
-    // Create new order
+    
     static async createOrder(
         req: CustomerRequest,
         res: Response,
@@ -23,7 +23,7 @@ export class OrderController {
         }
     }
 
-    // Get all orders
+    
     static async getAllOrders(
         req: CustomerRequest,
         res: Response,
@@ -40,7 +40,7 @@ export class OrderController {
         }
     }
 
-    // Get orders by customer ID
+    
     static async getOrdersByCustomer(
         req: CustomerRequest,
         res: Response,
@@ -59,7 +59,7 @@ export class OrderController {
         }
     }
 
-    // Get orders by restaurant ID
+    
     static async getOrdersByRestaurant(
         req: CustomerRequest,
         res: Response,
@@ -78,7 +78,7 @@ export class OrderController {
         }
     }
 
-    // Get specific order by ID
+    
     static async getOrderById(
         req: CustomerRequest,
         res: Response,
